@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us | Radharani Salon</title>
+
+    <link rel="stylesheet" href="ContactUs.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h2 class="logo">💖 Radharani</h2>
+    <ul>
+        <li><a href="beauty.html">Home</a></li>
+        <li><a href="services.html">Our Services</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a class="active" href="ContactUs.html">Contact Us</a></li>
+        <li><a href="AboutUs.html">About Us</a></li>
+    </ul>
+</nav>
+
+<header class="contact-hero">
+    <div class="photo-layer layer1"></div>
+    <div class="photo-layer layer2"></div>
+    <div class="photo-layer layer3"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Radharani Salon</h1>
+        <p>Luxury Beauty • Confidence • Care</p>
+    </div>
+</header>
+
+<section class="contact-section">
+    <div class="contact-container">
+
+        <div class="contact-info animate-left">
+            <h2>Get In Touch</h2>
+            <p>
+                Book your appointment today and enjoy luxury beauty services
+                with expert care and modern techniques.
+            </p>
+
+            <div class="info-box">
+                <i class="fas fa-phone"></i>
+                <span>+91 98609 16593</span>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-envelope"></i>
+                <span>vaishalikadam9860916593@gmail.com</span>
+            </div>
+
+            <div class="info-box">
+                <i class="fas fa-location-dot"></i>
+                <span>Near Vithai Mart, Latur, Maharashtra</span>
+            </div>
+
+            <div class="social-box">
+                <a href="https://www.instagram.com/radharani__makeup_studio" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/radharani__makeup_studio" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-form animate-right">
+            <h2>Book Appointment</h2>
+
+            <form id="contactForm">
+
+                <div class="input-box">
+                    <input type="text" name="name" id="name" required>
+                    <span>Full Name</span>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" name="email" id="email" required>
+                    <span>Email Address</span>
+                </div>
+
+                <div class="input-box">
+                    <input type="tel" name="phone" id="phone" required>
+                    <span>Mobile Number</span>
+                </div>
+
+                <div class="input-box">
+                    <input type="date" name="date" id="date" required>
+                </div>
+
+                <div class="input-box">
+                    <input type="time" name="time" id="time" required>
+                </div>
+
+                <div class="input-box">
+                    <select id="service" required onchange="updatePrice()">
+                        <option value="">Select Service</option>
+                        <option>Bridal Makeup</option>
+                        <option>Hair Styling</option>
+                        <option>Skin Care</option>
+                        <option>Hair Spa</option>
+                        <option>Facial</option>
+                    </select>
+                </div>
+
+                <p class="price-text" id="priceText"></p>
+
+                <div class="input-box">
+                    <textarea id="message" required></textarea>
+                    <span>Your Message</span>
+                </div>
+
+                <button type="submit" class="btn-book">Send Request</button>
+            </form>
+
+            <p id="successMsg"></p>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact-gallery">
+    <h2>Our Salon Experience</h2>
+    <div class="gallery-row">
+        <img src="beautys1.jpg">
+        <img src="beautys2.jpg">
+        <img src="beautys3.webp">
+        <img src="beautys3.avif">
+    </div>
+</section>
+
+<section class="map-section">
+    <iframe
+        src="https://www.google.com/maps?q=Radharani%20Parlour%20Near%20Vithai%20Mart%20Latur%20Maharashtra&output=embed"
+        loading="lazy">
+    </iframe>
+</section>
+
+<div class="direction-btn-wrap">
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Radharani%20Parlour%20Near%20Vithai%20Mart%20Latur%20Maharashtra"
+       target="_blank"
+       class="direction-btn">
+        📍 Get Directions
+    </a>
+</div>
+
+<a href="https://wa.me/919860916593" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<footer>
+    © 2026 Radharani Salon • Designed with Vedika ♥
+</footer>
+
+</body>
+</html>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const service = document.getElementById("service").value;
+    const message = document.getElementById("message").value;
+
+    fetch("http://127.0.0.1:8000/appointments", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name,
+            email,
+            phone,
+            date,
+            time,
+            service,
+            message
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Appointment Booked!");
+            document.getElementById("contactForm").reset();
+        } else {
+            alert("Booking failed!");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Server error!");
+    });
+});
+</script>

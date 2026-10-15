@@ -1,0 +1,10 @@
+﻿node_modules/
+.env
+build/
+dist/
+*.log
+__pycache__/
+*.pyc
+.vscode/
+jdkk/
+*.msi

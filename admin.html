@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Appointments</h2>
+
+<button onclick="logout()">Logout</button>
+
+<table border="1" id="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Service</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+
+window.onload = function() {
+
+    const role = localStorage.getItem("role");
+
+    // 🔥 FULL DEBUG
+    console.log("Stored Role Value:", role);
+    console.log("Type:", typeof role);
+
+    if (!role) {
+        alert("No role found in localStorage!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (role !== "admin") {
+        alert("Access Denied! Role = " + role);
+        window.location.href = "login.html";
+        return;
+    }
+
+    // ✅ IF ADMIN → LOAD DATA
+    fetch("http://127.0.0.1:8000/appointments")
+    .then(res => res.json())
+    .then(data => {
+        const table = document.querySelector("#table tbody");
+        table.innerHTML = "";
+
+        data.forEach(item => {
+            table.innerHTML += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td>${item.phone}</td>
+                    <td>${item.date}</td>
+                    <td>${item.time}</td>
+                    <td>${item.service}</td>
+                    <td>${item.message}</td>
+                </tr>
+            `;
+        });
+    })
+    .catch(err => {
+        console.error("Error loading data:", err);
+        alert("Failed to load appointments!");
+    });
+
+};
+
+// 🚪 LOGOUT
+function logout() {
+    localStorage.removeItem("role");
+    window.location.href = "/admin.html";
+}
+
+</script>
+
+</body>
+</html>
