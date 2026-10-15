@@ -78,7 +78,26 @@ A full stack beauty parlor website where customers can browse services and packa
 
 ## Screenshots
 
-_Add screenshots here (home page, services, packages, admin panel)._
+### Home
+![Home](screenshots/home.png)
+
+### Services
+![Services](screenshots/services.png)
+
+### Packages
+![Packages](screenshots/packages.png)
+
+### Gallery
+![Gallery](screenshots/gallery.png)
+
+### Login
+![Login](screenshots/login.png)
+
+### Admin Panel
+![Admin Panel](screenshots/admin.png)
+
+### Sign up
+![Sign Up](screenshots/signUp.png)
 
 ## Author
 
