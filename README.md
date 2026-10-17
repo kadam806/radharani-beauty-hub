@@ -97,7 +97,7 @@ A full stack beauty parlor website where customers can browse services and packa
 ![Admin Panel](screenshots/admin.png)
 
 ### Sign up
-![Sign Up](screenshots/signup.png)
+![Sign Up](screenshots/signUp.png)
 
 ## Author
 
